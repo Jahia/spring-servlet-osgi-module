@@ -24,17 +24,9 @@ public class SimpleServlet extends HttpServlet {
     }
 
     public void postConstruct() {
-        try {
-            httpService.registerServlet("/org.jahia.modules.samples.servlet.spring", this, null, null);
-        } catch (ServletException e) {
-            e.printStackTrace();
-        } catch (NamespaceException e) {
-            e.printStackTrace();
-        }
     }
 
     public void preDestroy() {
-        httpService.unregister("/org.jahia.modules.samples.servlet.spring");
     }
 
     public void setHttpService(HttpService httpService) {

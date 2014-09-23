@@ -7,10 +7,14 @@
        http://www.springframework.org/schema/osgi
        http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
-    <osgi:reference id="httpService" interface="org.osgi.service.http.HttpService" />
+    <bean id="simpleServlet" class="org.jahia.modules.samples.servlet.spring.SimpleServlet"/>
 
-    <bean id="simpleServlet" class="org.jahia.modules.samples.servlet.spring.SimpleServlet" init-method="postConstruct" destroy-method="preDestroy">
-        <property name="httpService" ref="httpService" />
+    <bean id="httpServiceListener" class="org.jahia.modules.samples.servlet.spring.HttpServiceListener">
+        <property name="simpleServlet" ref="simpleServlet" />
     </bean>
+
+    <osgi:reference id="httpService" interface="org.osgi.service.http.HttpService">
+        <osgi:listener ref="httpServiceListener" bind-method="onBind" unbind-method="onUnbind" />
+    </osgi:reference>
 
 </beans>
