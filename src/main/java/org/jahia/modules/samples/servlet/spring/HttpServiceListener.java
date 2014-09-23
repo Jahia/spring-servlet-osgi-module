@@ -29,7 +29,7 @@ public class HttpServiceListener implements BundleContextAware {
     }
 
     public void onBind(ServiceReference serviceReference) {
-        // hack : we don't use the passed service reference because it is a proxy class that we cannot use to retrieve the
+        // note : we don't use the passed service reference because it is a proxy class that we cannot use to retrieve the
         // real service object, so we simply look it up again
         ServiceReference realServiceReference = bundleContext.getServiceReference(HttpService.class.getName());
         HttpService httpService = (HttpService) bundleContext.getService(realServiceReference);
@@ -45,7 +45,7 @@ public class HttpServiceListener implements BundleContextAware {
     }
 
     public void onUnbind(ServiceReference serviceReference) {
-        // hack : we don't use the passed service reference because it is a proxy class that we cannot use to retrieve the
+        // note : we don't use the passed service reference because it is a proxy class that we cannot use to retrieve the
         // real service object, so we simply look it up again
         // here we have a lot of null checks because in the case of a framework shutdown the service can disappear
         // at any time.
